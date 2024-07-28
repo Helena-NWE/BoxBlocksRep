@@ -15,8 +15,10 @@ import org.quiltmc.qsl.item.setting.api.QuiltItemSettings;
 
 
 
-public class BoxItems extends Blocks implements BlockEntityProvider{
-	public static final Block BLUE_SKYBLOCK = new Block(QuiltBlockSettings.of(Material.GLASS, MapColor.BLUE).luminance(15));
+public class BoxItems extends Blocks{
+
+
+	public static final Block BLUE_SKYBLOCK = new BlueBlock(QuiltBlockSettings.of(Material.GLASS, MapColor.BLUE).luminance(15));
 
 
 	public static void register(ModContainer box_blocks) {
@@ -25,13 +27,11 @@ public class BoxItems extends Blocks implements BlockEntityProvider{
 		Registry.register(Registry.ITEM, new Identifier(box_blocks.metadata().id(), "blue_skyblock"), new BlockItem(BLUE_SKYBLOCK, new QuiltItemSettings().group(ItemGroup.DECORATIONS)));
 		}
 
-	@Override
-	public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
-		return new SkyBlock(pos, state);
-	}
+
 
 	public static final BlockEntityType<SkyBlock> SKY_BLOCK_BLOCK_ENTITY_TYPE =
 		Registry.register(Registry.BLOCK_ENTITY_TYPE, new Identifier("box_blocks","skyblock"), QuiltBlockEntityTypeBuilder.create(SkyBlock::new,BLUE_SKYBLOCK).build());
+
 
 }
 
