@@ -20,11 +20,11 @@ import static java.lang.Math.*;
 public class SkyBlockRenderer implements BlockEntityRenderer<SkyBlock> {
 
 	private Quaternion RotationY(float angle){
-		Quaternion rot = new Quaternion(0,1,0,angle);
+		Quaternion rot = new Quaternion(0,1,0, (float)sin(angle));
 		return rot;
 	}
 
-	private static ItemStack stack = new ItemStack(Items.JUKEBOX, 1);
+	private static ItemStack stack = new ItemStack(Items.CYAN_CONCRETE, 1);
 
 	public SkyBlockRenderer(BlockEntityRendererFactory.Context ctx) {}
 
@@ -40,14 +40,12 @@ public class SkyBlockRenderer implements BlockEntityRenderer<SkyBlock> {
 
 		// Rotate the item
 		matrices.multiply(RotationY(blockEntity.getWorld().getTime() + tickDelta));
+		matrices.scale(4,4,4);
 
-		MinecraftClient.getInstance().getItemRenderer().renderItem(stack, ModelTransformation.Mode.GROUND, light, overlay, matrices, vertexConsumers, 0);
+		int lightAbove = WorldRenderer.getLightmapCoordinates(blockEntity.getWorld(), blockEntity.getPos().up());
+		MinecraftClient.getInstance().getItemRenderer().renderItem(stack, ModelTransformation.Mode.GROUND, 15728880, OverlayTexture.DEFAULT_UV, matrices, vertexConsumers, 0);
 
 		// Mandatory call after GL calls
 		matrices.pop();
-
-		int lightAbove = WorldRenderer.getLightmapCoordinates(blockEntity.getWorld(), blockEntity.getPos().up());
-		MinecraftClient.getInstance().getItemRenderer().renderItem(stack, ModelTransformation.Mode.GROUND, lightAbove, OverlayTexture.DEFAULT_UV, matrices, vertexConsumers, 0);
-
 	}
 }
