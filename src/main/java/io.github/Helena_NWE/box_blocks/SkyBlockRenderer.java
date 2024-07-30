@@ -20,7 +20,7 @@ import static java.lang.Math.*;
 public class SkyBlockRenderer implements BlockEntityRenderer<SkyBlock> {
 
 	private Quaternion RotationY(float angle){
-		Quaternion rot = new Quaternion(0,1,0, (float)sin(angle));
+		Quaternion rot = new Quaternion(0,(float)cos(angle/360),0, (float)sin(angle/360));
 		return rot;
 	}
 
@@ -35,12 +35,12 @@ public class SkyBlockRenderer implements BlockEntityRenderer<SkyBlock> {
 		// Calculate the current offset in the y value
 		double offset = Math.sin((blockEntity.getWorld().getTime() + tickDelta) / 8.0) / 4.0;
 		// Move the item
-		matrices.translate(0.5, 1.25 + offset, 0.5);
+		matrices.translate(0.5, -0.25, 0.5);
 
 
 		// Rotate the item
-		matrices.multiply(RotationY(blockEntity.getWorld().getTime() + tickDelta));
-		matrices.scale(4,4,4);
+		//matrices.multiply(RotationY(blockEntity.getWorld().getTime() + tickDelta));
+		matrices.scale((float)4,(float)4,(float)4);
 
 		int lightAbove = WorldRenderer.getLightmapCoordinates(blockEntity.getWorld(), blockEntity.getPos().up());
 		MinecraftClient.getInstance().getItemRenderer().renderItem(stack, ModelTransformation.Mode.GROUND, 15728880, OverlayTexture.DEFAULT_UV, matrices, vertexConsumers, 0);
