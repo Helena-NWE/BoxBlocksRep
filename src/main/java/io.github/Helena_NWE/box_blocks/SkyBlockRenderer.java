@@ -43,7 +43,7 @@ public class SkyBlockRenderer implements BlockEntityRenderer<SkyBlock> {
 		matrices.scale((float)4,(float)4,(float)4);
 
 		int lightAbove = WorldRenderer.getLightmapCoordinates(blockEntity.getWorld(), blockEntity.getPos().up());
-		MinecraftClient.getInstance().getItemRenderer().renderItem(stack, ModelTransformation.Mode.GROUND, 15728880, OverlayTexture.DEFAULT_UV, matrices, vertexConsumers, 0);
+		//MinecraftClient.getInstance().getItemRenderer().renderItem(stack, ModelTransformation.Mode.GROUND, 15728880, OverlayTexture.DEFAULT_UV, matrices, vertexConsumers, 0);
 
 		// Mandatory call after GL calls
 		matrices.pop();
