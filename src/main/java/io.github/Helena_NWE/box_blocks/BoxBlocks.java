@@ -18,6 +18,7 @@ public class BoxBlocks implements ModInitializer {
 	public void onInitialize(ModContainer box_blocks) {
 		LOGGER.info("Hello Quilt world from {}!", box_blocks.metadata().name());
 		BoxItems.register(box_blocks);
+		buffers.register(box_blocks);
 		BlockEntityRendererFactories.register(SKY_BLOCK_BLOCK_ENTITY_TYPE, SkyBlockRenderer::new);
 	}
 }
